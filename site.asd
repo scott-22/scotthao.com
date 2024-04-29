@@ -2,7 +2,7 @@
   :author "Scott Hao"
   :depends-on ("clack"
                "lack"
-               "trivia")
+               "cl-ppcre")
   :components ((:module "src"
                 :components
                 ((:file "app")))))
