@@ -1,14 +1,25 @@
-(in-package :site)
+(defpackage router
+  (:use :cl)
+  (:import-from :cl-ppcre
+                :split
+                :scan-to-strings)
+  (:export :make-router
+           :handle-error
+           :handle-route
+           :add-route
+           :defroute
+           :route))
+(in-package :router)
 
 (defun split-route (route)
   (multiple-value-bind
     (match regs)
-    (cl-ppcre:scan-to-strings "([^\\?]*)(?:\\?(.*))?" route)
+    (scan-to-strings "([^\\?]*)(?:\\?(.*))?" route)
     (when match
       (let ((path (aref regs 0))
             (query (aref regs 1)))
         (declare (ignore query)) ; Ignore query params for now
-        (remove "" (cl-ppcre:split "/" path) :test #'string=)))))
+        (remove "" (split "/" path) :test #'string=)))))
 
 ;; Routes are stored in a tree structure
 (defstruct path-node
@@ -48,7 +59,7 @@
              (subdir-token (if (char= (char subdir 0) #\:)
                                (values (intern (string-upcase (remove #\: subdir)) :keyword))
                                subdir))
-             (child (get-path-node-child node subdir-token :exact t)))
+             (child (cdr (get-path-node-child node subdir-token :exact t))))
         (if child
             (make-path-node-route child (cdr subdirs) method handler)
             (let ((new-child (make-path-node)))
@@ -63,7 +74,7 @@
   (errors nil :type list))                 ; alist mapping error code to handler
 
 (defun handle-error (router code env)
-  (let ((handler (assoc code (router-errors router))))
+  (let ((handler (cdr (assoc code (router-errors router)))))
     (if handler (funcall handler env) (error "HTTP code ~S has no handler" code))))
 
 (defun handle-route (router path env)
@@ -72,13 +83,16 @@
     (match-path-node-route
      (router-index router)
      (split-route path)
-     empty)
+     nil)
     (or (when node
           (let ((handler (get-path-node-handler node (getf env :request-method))))
             (when handler
-              (let ((response (funcall handler (cons :ROUTE-PARAMS (cons params env)))))
+              (let ((response (funcall handler (cons :route-params (cons params env)))))
                 (if (listp response) response (handle-error router response env))))))
         (handle-error router 404 env))))
+
+(defun add-error (router code handler)
+  (struct-push (router-errors router) (cons code handler)))
 
 (defun add-route (router path method handler)
   (make-path-node-route
@@ -86,3 +100,19 @@
    (split-route path)
    method
    handler))
+
+;; Default router singleton used in application
+(defparameter *router* (make-router))
+
+(defmacro defroute (path-or-error &rest args)
+  (if (stringp path-or-error)
+      (destructuring-bind (method lambda-list &rest body) args
+        (let ((handler `#'(lambda ,lambda-list ,@body)))
+          `(add-route *router* ,path-or-error ,method ,handler)))
+      (destructuring-bind (lambda-list &rest body) args
+        (let ((handler `#'(lambda ,lambda-list ,@body)))
+          `(add-error *router* ,path-or-error ,handler)))))
+
+(defun route (env)
+  (let ((path (getf env :request-uri)))
+    (handle-route *router* path env)))

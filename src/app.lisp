@@ -1,11 +1,9 @@
-(defpackage site
+(defpackage app
   (:use :cl)
   (:import-from :lack
                 :builder)
-  (:import-from :cl-ppcre
-                :split)
   (:export :make-app))
-(in-package :site)
+(in-package :app)
 
 (defparameter *app*
   (lambda (env)
