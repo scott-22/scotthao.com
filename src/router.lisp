@@ -62,3 +62,27 @@
   (index (make-path-node) :type path-node) ; root of route tree
   (errors nil :type list))                 ; alist mapping error code to handler
 
+(defun handle-error (router code env)
+  (let ((handler (assoc code (router-errors router))))
+    (if handler (funcall handler env) (error "HTTP code ~S has no handler" code))))
+
+(defun handle-route (router path env)
+  (multiple-value-bind
+    (node params)
+    (match-path-node-route
+     (router-index router)
+     (split-route path)
+     empty)
+    (or (when node
+          (let ((handler (get-path-node-handler node (getf env :request-method))))
+            (when handler
+              (let ((response (funcall handler (cons :ROUTE-PARAMS (cons params env)))))
+                (if (listp response) response (handle-error router response env))))))
+        (handle-error router 404 env))))
+
+(defun add-route (router path method handler)
+  (make-path-node-route
+   (router-index router)
+   (split-route path)
+   method
+   handler))
