@@ -2,13 +2,13 @@
   (:use :cl)
   (:import-from :lack
                 :builder)
+  (:import-from :router
+                :route)
   (:export :make-app))
 (in-package :app)
 
 (defparameter *app*
-  (lambda (env)
-    (print (getf env :request-uri))
-    '(200 (:content-type "text/plain") ("Hello World"))))
+  #'(lambda (env) (route env)))
 
 (defun make-app ()
   (builder

@@ -5,4 +5,8 @@
                "cl-ppcre")
   :components ((:module "src"
                 :components
-                ((:file "app")))))
+                ((:file "app" :depends-on ("controllers"))
+                 (:file "router")
+                 (:module "controllers" :depends-on ("router")
+                  :components
+                  ((:file "index")))))))
