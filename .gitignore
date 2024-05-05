@@ -5,3 +5,4 @@
 
 # Custom
 .DS_Store
+templates/compiled
