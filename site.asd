@@ -8,8 +8,8 @@
   :components ((:module "src"
                 :components
                 ((:file "app" :depends-on ("controllers"))
-                 (:file "router")
                  (:file "templater")
+                 (:file "router" :depends-on ("templater"))
                  (:module "controllers" :depends-on ("router" "templater")
                   :components
                   ((:file "index")))))))
