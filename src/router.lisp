@@ -9,6 +9,14 @@
            :add-route
            :defroute
            :route))
+
+(defpackage controllers
+  (:use :cl)
+  (:import-from :router
+                :defroute)
+  (:import-from :templater
+                :template))
+
 (in-package :router)
 
 (defun split-route (route)

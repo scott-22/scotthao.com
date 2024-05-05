@@ -3,9 +3,13 @@
   (:import-from :uiop
                 :file-exists-p)
   (:export :template))
+
+(defpackage templates
+  (:use :cl :spinneret :parenscript))
+
 (in-package :templater)
 
-;; Templates generate html using spinneret and must be defined inside the spinneret package
+;; Templates generate html using spinneret and must be defined inside the `templates` package
 
 ;; Each template defines a function, named the same as the file stem, that generates the html
 ;; Any dynamic data should be passed in as args to this function, there should be no
@@ -28,5 +32,5 @@
         (load (make-pathname :directory `(:relative "templates" ,(if static "static" "dynamic"))
                              :name file
                              :type "lisp"))
-        (apply (values (intern (string-upcase file) :spinneret)) args)))
+        (apply (values (intern (string-upcase file) :templates)) args)))
     path))

@@ -1,7 +1,3 @@
-(defpackage controllers
-  (:use :cl)
-  (:import-from :router
-                :defroute))
 (in-package controllers)
 
 ;; Routes

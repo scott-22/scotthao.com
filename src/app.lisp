@@ -4,6 +4,8 @@
                 :builder)
   (:import-from :router
                 :route)
+  (:import-from :templater
+                :template)
   (:export :make-app))
 (in-package :app)
 
