@@ -1,4 +1,5 @@
 (in-package :templates)
+(load "templates/utils.lisp")
 
 (defun 404error ()
   (with-html

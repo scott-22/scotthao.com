@@ -3,11 +3,13 @@
 
 (defparameter *args* (uiop:command-line-arguments))
 
-(defparameter *app* (site:make-app))
+(defparameter *app* (app:make-app))
 
 (defparameter *handler*
   (clack:clackup
    *app*
    :server :woo
-   :port (values (parse-integer (cadr (member "--port" *args* :test #'string=))))
-   :debug (member "--debug" *args* :test #'string=)))
+   :port (if *args*
+             (values (parse-integer (cadr (member "--port" *args* :test #'string=))))
+             3000)
+   :debug (when *args* (member "--debug" *args* :test #'string=))))

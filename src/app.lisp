@@ -15,4 +15,6 @@
 (defun make-app ()
   (builder
    :accesslog
+   (:static :path "/public/"
+            :root #P"public/")
    *app*))
