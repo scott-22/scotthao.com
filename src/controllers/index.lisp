@@ -2,7 +2,7 @@
 
 ;; Routes
 (defroute "/" :GET (env)
-  '(200 (:content-type "text/plain") ("Hello World")))
+  `(200 (:content-type "text/html") ,(template "index" :static)))
 
 ;; Default error handlers
 (defroute 404 (env)

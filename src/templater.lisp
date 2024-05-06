@@ -12,8 +12,7 @@
 ;; Templates generate html using spinneret and must be defined inside the `templates` package
 
 ;; Each template defines a function, named the same as the file stem, that generates the html
-;; Any dynamic data should be passed in as args to this function, there should be no
-;; free variables apart from implicitly used *html*
+;; Dynamic data should be passed in as args to this function, there should be no free variables
 (defun template (file template-type &rest args)
   (unless (every #'alphanumericp file) (error "Template name must be alphanumeric"))
   (let* ((dir (ensure-directories-exist
