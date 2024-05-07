@@ -25,6 +25,6 @@ RUN chown -R "${SITENAME}:${SITENAME}" . \
 USER "${SITENAME}"
 
 ENTRYPOINT ["sbcl", "--load", "start.lisp"]
-CMD ["--port", "3000"]
+CMD ["--bind", "0.0.0.0", "--port", "3000"]
 
 EXPOSE 3000
