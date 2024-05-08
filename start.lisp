@@ -9,7 +9,7 @@
    *app*
    :server :woo
    :address (if *args*
-                (values (cadr (member "--bind" *args* :test #'string=)))
+                (cadr (member "--bind" *args* :test #'string=))
                 "127.0.0.1")
    :port (if *args*
              (values (parse-integer (cadr (member "--port" *args* :test #'string=))))

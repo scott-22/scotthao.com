@@ -20,8 +20,7 @@ USER root
 # System user to launch app
 RUN addgroup --system "${SITENAME}" \
     && adduser --ingroup "${SITENAME}" --shell /bin/false --home /home/site --disabled-password "${SITENAME}"
-RUN chown -R "${SITENAME}:${SITENAME}" . \
-    && chown -R "${SITENAME}:${SITENAME}" /home/site
+RUN chown -R "${SITENAME}:${SITENAME}" /home/site
 USER "${SITENAME}"
 
 ENTRYPOINT ["sbcl", "--load", "start.lisp"]

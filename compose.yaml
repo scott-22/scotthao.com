@@ -1,5 +1,6 @@
 services:
   site:
+    restart: always
     build: .
     ports:
-      - "${HOSTPORT}:3000"
+      - "${HOSTPORT:-3000}:3000"
