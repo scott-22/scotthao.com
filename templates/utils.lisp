@@ -7,5 +7,6 @@
       (:head
        (:title ,title)
        (:link :rel "icon" :href "public/favicon.ico")
+       (:link :rel "stylesheet" :href "public/layout.css")
        ,head)
       (:body ,body))))

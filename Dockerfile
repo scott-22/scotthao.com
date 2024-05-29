@@ -17,6 +17,13 @@ COPY . .
 
 USER root
 
+# Compile tailwind.css stylesheets
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 \
+    && chmod +x tailwindcss-linux-x64 \
+    && mv tailwindcss-linux-x64 tailwindcss
+RUN ./tailwindcss -i ./public/styles.css -o ./public/layout.css --minify \
+    && rm tailwindcss
+
 # System user to launch app
 RUN addgroup --system "${SITENAME}" \
     && adduser --ingroup "${SITENAME}" --shell /bin/false --home /home/site --disabled-password "${SITENAME}"
