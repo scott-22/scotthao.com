@@ -4,6 +4,7 @@
   `(with-html
      (:doctype)
      (:html
+      :class "font-display"
       (:head
        (:title ,title)
        (:link :rel "icon" :href "public/favicon.ico")
