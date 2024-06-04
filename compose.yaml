@@ -1,6 +1,13 @@
 services:
   site:
     restart: always
-    build: .
+    build:
+      context: .
+      args:
+        - "SITENAME=${SITENAME:-site}"
+    volumes:
+      - type: bind
+        source: ./templates
+        target: "/home/site/quicklisp/local-projects/${SITENAME:-site}/templates"
     ports:
       - "${HOSTPORT:-3000}:3000"

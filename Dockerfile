@@ -1,5 +1,5 @@
 FROM clfoundation/sbcl:latest
-ARG SITENAME=site
+ARG SITENAME
 
 RUN apt-get update \
     && apt-get install -y libev4
@@ -13,14 +13,15 @@ ENV QUICKLISP_ADD_TO_INIT_FILE=true
 RUN /usr/local/bin/install-quicklisp
 
 WORKDIR /home/site/quicklisp/local-projects/"${SITENAME}"
-COPY . .
-
 USER root
 
 # Compile tailwind.css stylesheets
 RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 \
     && chmod +x tailwindcss-linux-x64 \
     && mv tailwindcss-linux-x64 tailwindcss
+
+COPY . .
+
 RUN ./tailwindcss -i ./public/styles.css -o ./public/layout.css --minify \
     && rm tailwindcss
 
