@@ -35,11 +35,7 @@
   (children nil :type list)) ; alist mapping subdir to node
 
 (defmacro struct-push (list &rest items)
-  (labels ((cons-many (list items)
-             (if items
-                 `(cons ,(car items) ,(cons-many list (cdr items)))
-                 list)))
-    `(setf ,list ,(cons-many list items))))
+    `(setf ,list (append ,(cons 'list items) ,list)))
 
 (defun get-path-node-handler (node method)
   (or (getf (path-node-handlers node) method)

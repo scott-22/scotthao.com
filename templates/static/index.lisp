@@ -2,8 +2,8 @@
 (load "templates/utils.lisp")
 
 (defmacro body ()
-  `(with-html
-     (:h1 "Scott Hao")))
+  `(content
+    (page-title "Scott Hao")))
 
 (defun index ()
   (layout :body (body)))
