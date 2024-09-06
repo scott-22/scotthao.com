@@ -1,4 +1,5 @@
-FROM clfoundation/sbcl:latest
+# ------------- Base image used for both build targets  -------------
+FROM clfoundation/sbcl:latest AS base
 ARG SITENAME
 
 RUN apt-get update \
@@ -15,12 +16,31 @@ RUN /usr/local/bin/install-quicklisp
 WORKDIR /home/site/quicklisp/local-projects/"${SITENAME}"
 USER root
 
-# Compile tailwind.css stylesheets
+# Download tailwind.css executable
 RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 \
     && chmod +x tailwindcss-linux-x64 \
     && mv tailwindcss-linux-x64 tailwindcss
 
 COPY . .
+
+
+# ------------- Development image  -------------
+FROM base as dev
+
+# System user to launch app
+RUN addgroup --system "${SITENAME}" \
+    && adduser --ingroup "${SITENAME}" --shell /bin/false --home /home/site --disabled-password "${SITENAME}"
+RUN chown -R "${SITENAME}:${SITENAME}" /home/site
+USER "${SITENAME}"
+
+ENTRYPOINT ["sbcl", "--load", "start.lisp"]
+CMD ["--bind", "0.0.0.0", "--port", "3000", "--swank-port", "4005", "--debug"]
+
+EXPOSE 3000 4005
+
+
+# ------------- Production image  -------------
+FROM base as prod
 
 RUN ./tailwindcss -i ./public/styles.css -o ./public/layout.css --minify \
     && rm tailwindcss

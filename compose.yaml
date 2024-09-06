@@ -5,9 +5,11 @@ services:
       context: .
       args:
         - "SITENAME=${SITENAME:-site}"
+      target: ${TARGET:-prod}
     volumes:
       - type: bind
         source: ./templates
         target: "/home/site/quicklisp/local-projects/${SITENAME:-site}/templates"
     ports:
       - "${HOSTPORT:-3000}:3000"
+      - "${SWANKPORT:-4005}:4005"
