@@ -15,7 +15,7 @@
 (defmacro content (&rest args)
   `(with-html
      (:div
-      :class "w-full sm:w-[600px] min-h-screen p-7 md:p-9 mx-auto"
+      :class "w-full sm:w-[650px] min-h-screen pt-9 pb-3 px-7 md:px-9 mx-auto"
       ,@args)))
 
 (defmacro section (&rest args)
@@ -24,23 +24,17 @@
       :class "mt-12"
       ,@args)))
 
-(defmacro section-block (&rest args)
-  `(with-html
-     (:div
-      :class "flex flex-col gap-8"
-      ,@args)))
-
-(defmacro section-item (heading description date &optional heading-url)
+(defmacro section-item (heading description &optional date heading-url)
   `(with-html
      (:div
       :class "flex flex-col"
       (:div
-       :class "flex flex-row justify-between"
+       :class ,(if date "flex flex-row justify-between" "flex flex-row")
         (page-heading
           ,(if heading-url
                `(url ,heading ,heading-url "hover:underline")
                heading))
-        (page-small ,date :class "mt-[24px]"))
+        ,(when date `(page-small ,date :class "mt-[24px]")))
       (:div (page-description ,description)))))
 
 (defmacro url (text href &optional class)
@@ -55,7 +49,7 @@
 (defmacro page-title (title-text &rest args)
   `(with-html
      (:h1
-      :class "text-3xl text-zinc-800 mt-8 font-emphasis"
+      :class "font-emphasis text-3xl text-zinc-800 mt-8"
       ,@args
       ,title-text)))
 
@@ -69,7 +63,7 @@
 (defmacro page-heading (title-text &rest args)
   `(with-html
      (:h3
-      :class "text-lg text-zinc-700 mt-4"
+      :class "font-emphasis text-lg text-zinc-700 mt-4"
       ,@args
       ,title-text)))
 
@@ -90,7 +84,7 @@
 (defmacro page-small (title-text &rest args)
   `(with-html
      (:p
-      :class "text-xs text-zinc-600"
+      :class "font-emphasis text-xs text-zinc-600"
       ,@args
       ,title-text)))
 
