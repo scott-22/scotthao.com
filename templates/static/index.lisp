@@ -7,7 +7,7 @@
       :class "mt-12"
       (page-title "Scott Hao")
       (page-text "I work on smart and fast systems.")
-      (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, art, staying active, and collecting rocks.")
+      (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, writing, art, staying active, and collecting rocks.")
       (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
       (:div 
        :class "flex flex-row w-1/2 justify-between"
