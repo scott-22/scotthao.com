@@ -17,7 +17,7 @@ WORKDIR /home/site/quicklisp/local-projects/"${SITENAME}"
 USER root
 
 # Download tailwind.css executable
-RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 \
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.17/tailwindcss-linux-x64 \
     && chmod +x tailwindcss-linux-x64 \
     && mv tailwindcss-linux-x64 tailwindcss
 

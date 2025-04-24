@@ -8,6 +8,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       'display': ['"Open Sans"', 'sans-serif'],
+      'emphasis': ['Georgia', 'serif'],
     }
   },
   plugins: [],
