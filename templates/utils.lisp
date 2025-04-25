@@ -18,6 +18,19 @@
       :class "w-full sm:w-[650px] min-h-screen pt-9 pb-3 px-7 md:px-9 mx-auto"
       ,@args)))
 
+(defmacro header (title &rest args)
+  `(with-html
+     (:header
+      :class "mt-12"
+      (:div
+       :class "flex flex-row justify-between"
+       (page-title ,title))
+      ;  (:div
+      ;   :class "w-1/6 flex flex-row justify-between mt-[15px]"
+      ;   (page-small (page-link "Home" "/"))
+      ;   (page-small (page-link "Writing" "/writing"))))
+      ,@args)))
+
 (defmacro section (&rest args)
   `(with-html
      (:section
@@ -46,10 +59,17 @@
       :class ,class
       ,text)))
 
+(defmacro page-link (text path &optional class)
+  `(with-html
+     (:a
+      :href ,path
+      :class ,class
+      ,text)))
+
 (defmacro page-title (title-text &rest args)
   `(with-html
      (:h1
-      :class "font-emphasis text-3xl text-zinc-800 mt-8"
+      :class "font-emphasis text-3xl text-zinc-800"
       ,@args
       ,title-text)))
 

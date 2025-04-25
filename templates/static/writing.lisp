@@ -4,8 +4,8 @@
 (defmacro body ()
   `(content
      (header
-       "404"
+       "Writing"
        (page-text "This page was not found."))))
 
-(defun 404error ()
-  (layout :title "Not found - Scott Hao" :body (body)))
+(defun writing ()
+  (layout :title "Writing - Scott Hao" :body (body)))

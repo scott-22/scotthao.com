@@ -2,7 +2,7 @@
 
 My personal website, written with Common Lisp.
 
-## API
+## Framework
 
 This website comes with a custom web framework, building on top of the open source Clack server.
 Similar to other web frameworks, you can define endpoint or error handlers that take a request as input and produce HTML as output.
@@ -66,7 +66,7 @@ To develop, run the Docker container while setting the target env variable to `d
 1. `TARGET=dev docker compose build site`
 1. `docker compose up site`
 1. Use editor of choice to edit the project
-1. To access dev utilities, connect to port `4005` using emacs with SLIME (`M-x slime-connect` with default settings) to open a REPL
+1. To access dev utilities, connect to port `4005` using emacs with SLIME (`M-x slime-connect` with default settings) and open a REPL
 
 If using dev utilities, you can recompile the website from the REPL with `(rl)`. See `devutils.lisp` for all utilities.
 

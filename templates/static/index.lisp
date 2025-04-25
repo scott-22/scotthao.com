@@ -3,17 +3,16 @@
 
 (defmacro body ()
   `(content
-     (:header
-      :class "mt-12"
-      (page-title "Scott Hao")
-      (page-text "I work on smart and fast systems.")
-      (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, writing, art, staying active, and collecting rocks.")
-      (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
-      (:div 
-       :class "flex flex-row w-1/2 justify-between"
-       (page-url "Linkedin" "https://www.linkedin.com/in/scott-hao/")
-       (page-url "Github" "https://github.com/scott-22")
-       (page-url "Email" "mailto:scotthao65@gmail.com")))
+     (header
+       "Scott Hao"
+       (page-text "I work on smart and fast systems.")
+       (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, writing, art, staying active, and collecting rocks.")
+       (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
+       (:div 
+        :class "flex flex-row md:w-1/2 justify-between"
+        (page-url "Linkedin" "https://www.linkedin.com/in/scott-hao/")
+        (page-url "Github" "https://github.com/scott-22")
+        (page-url "Email" "mailto:scotthao65@gmail.com")))
      (section
        (page-subtitle "Work")
        (section-item
@@ -49,7 +48,7 @@
      (:footer
       :class "mt-24"
       (page-text
-        (page-url "Made with λ" "https://github.com/scott-22/scotthao.ca")
+        (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")
         :class "mb-0"))))
 
 (defun index ()
