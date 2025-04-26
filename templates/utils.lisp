@@ -24,16 +24,20 @@
       :class "mt-12"
       (:div
        :class "flex flex-row justify-between"
-       (page-title ,title))
-      ;  (:div
-      ;   :class "w-1/6 flex flex-row justify-between mt-[15px]"
-      ;   (page-small (page-link "Home" "/"))
-      ;   (page-small (page-link "Writing" "/writing"))))
+       (page-title ,title)
+       (:div
+        :class "w-1/6 flex flex-row justify-between mt-[15px]"
+        (page-small (page-link "Home" "/"))
+        (page-small (page-link "Writing" "/writing"))))
       ,@args)))
 
-(defmacro footer (&rest args)
+(defmacro footer ()
   `(with-html
-     (:footer :class "mt-24" ,@args)))
+     (:footer
+      :class "mt-24"
+      (page-text
+        :class "mb-0"
+        (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")))))
 
 (defmacro section (&rest args)
   `(with-html
@@ -41,17 +45,20 @@
       :class "mt-12"
       ,@args)))
 
-(defmacro section-item (heading description &optional date heading-url)
+(defmacro section-item (heading &key description date heading-url heading-page-link)
   `(with-html
      (:div
       :class "flex flex-col"
-      (:div
-       :class ,(if date "flex flex-row justify-between" "flex flex-row")
-        (page-heading
-          ,(if heading-url
-               `(url ,heading ,heading-url "hover:underline")
-               heading))
-        ,(when date `(page-small :class "mt-[24px]" ,date)))
+      ,(let ((info `(:div
+                     :class "flex flex-row justify-between"
+                     (page-heading
+                       ,(if heading-url
+                            `(url ,heading ,heading-url "hover:underline")
+                            heading))
+                     ,(when date `(page-small :class "mt-[24px]" ,date)))))
+         (if heading-page-link
+             `(page-link ,info ,heading-page-link "hover:underline")
+             info))
       (:div (page-description ,description)))))
 
 (defmacro url (text href &optional class)

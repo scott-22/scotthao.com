@@ -17,38 +17,35 @@
        (page-subtitle "Work")
        (section-item
          "Bloomberg"
-         "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with algorithms and zero-copy strategies."
-         "Jan 2025 - Apr 2025"
-         "https://www.bloomberg.com/")
+         :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with algorithms and zero-copy strategies."
+         :date "Jan 2025 - Apr 2025"
+         :heading-url "https://www.bloomberg.com/")
        (section-item
          "Bloomberg"
-         "Released a debugging tool for distributed systems to over 300 engineers. Fixed an org-wide observability bug causing missing data in distributed traces that went unsolved for 6 months."
-         "May 2024 - Aug 2024"
-         "https://www.bloomberg.com/")
+         :description "Released a debugging tool for distributed systems to over 300 engineers. Fixed an org-wide observability bug causing missing data in distributed traces that went unsolved for 6 months."
+         :date "May 2024 - Aug 2024"
+         :heading-url "https://www.bloomberg.com/")
        (section-item
          "MIT-PITT-RW"
-         "Infrastructure work for an autonomous racing team. Created data visualizations used by a team-authored paper accepted to ICRA 2025."
-         "Oct 2023 - Apr 2024"
-         "https://www.indyautonomouschallenge.com/mit-pitt-rw")
+         :description "Infrastructure work for an autonomous racing team. Created data visualizations used by a team-authored paper accepted to ICRA 2025."
+         :date "Oct 2023 - Apr 2024"
+         :heading-url "https://www.indyautonomouschallenge.com/mit-pitt-rw")
        (section-item
          "Royal Bank of Canada"
-         "Prototyped a rule-based system to score the quality of internal APIs. Designed a grammar and parser for scoring guidelines."
-         "Jul 2023 - Aug 2023"
-         "https://www.rbcroyalbank.com/"))
+         :description "Prototyped a rule-based system to score the quality of internal APIs. Designed a grammar and parser for scoring guidelines."
+         :date "Jul 2023 - Aug 2023"
+         :heading-url "https://www.rbcroyalbank.com/"))
      (section
        (page-subtitle "Projects")
        (section-item
          "Intelligent Prover"
-         "An automated theorem prover supporting full first-order logic and smart premise selection. Currently a work-in-progress."
-         (page-url "Github link" "https://github.com/scott-22/intelligent-prover"))
+         :description "An automated theorem prover supporting full first-order logic and smart premise selection. Currently a work-in-progress."
+         :date (page-url "Github link" "https://github.com/scott-22/intelligent-prover"))
        (section-item
          "Text Editor"
-         "Terminal-based text editor built from scratch in C++. Supports most Vim commands, undo, macros, and efficient text manipulation."
-         (page-url "Email for repo" "mailto:scotthao65@gmail.com")))
-     (footer
-       (page-text
-         :class "mb-0"
-         (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")))))
+         :description "Terminal-based text editor built from scratch in C++. Supports most Vim commands, undo, macros, and efficient text manipulation."
+         :date (page-url "Email for repo" "mailto:scotthao65@gmail.com")))
+     (footer)))
 
 (defun index ()
   (layout :body (body)))
