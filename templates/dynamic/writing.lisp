@@ -18,30 +18,41 @@
                    (defparameter scrambler (new (*scramble (aref *elems i) (aref *targets i))))
                    (set-timeout (@ scrambler start) (* i 1000)))))))))))
 
+(defun repeat-string (n string)
+  (with-output-to-string (stream)
+    (dotimes (i n) (write-string string stream))))
+
 (defmacro body ()
   `(content
      (header
        "Scott Hao"
        (dolist
          (i featured-text)
-         (page-text :class "scramble-text" (:raw "&nbsp;")))
-       (page-small :class "mt-4" (page-link (:raw "&nbsp;") "" "scramble-text hover:underline italic text-cyan-600")))
-     (section
-       (page-subtitle "Blog")
-       (dolist
-         (article articles)
-         (section-item
-           (car article)
-           :date (cadr article)
-           :heading-page-link (concatenate 'string "writing/" (caddr article)))))
-     (section
-       (page-subtitle "Essays")
-       (dolist
-         (essay essays)
-         (section-item
-           (car essay)
-           :date (cadr essay)
-           :heading-page-link (concatenate 'string "writing/" (caddr essay)))))
+         (page-text :class "scramble-text" (:span :class "text-transparent" i)))
+       (page-small
+         :class "mt-4"
+         (page-link
+           (:raw "&nbsp;")
+           "javascript:window.location.reload(true)"
+           "scramble-text hover:underline italic text-cyan-600")))
+     (when articles
+       (section
+         (page-subtitle "Blog")
+         (dolist
+           (article articles)
+           (section-item
+             (car article)
+             :date (cadr article)
+             :heading-page-link (concatenate 'string "writing/" (caddr article))))))
+     (when essays
+       (section
+         (page-subtitle "Essays")
+         (dolist
+           (essay essays)
+           (section-item
+             (car essay)
+             :date (cadr essay)
+             :heading-page-link (concatenate 'string "writing/" (caddr essay))))))
      (footer)))
 
 (defun writing (featured-text articles essays)
