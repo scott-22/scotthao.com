@@ -32,7 +32,7 @@ class Scramble {
                     + "<span class=\"text-zinc-700\">"
                     + getScrambled(this.upperBound - this.correctPrefix)
                     + "</span>"
-                    + "<span class=\"text-transparent\">"
+                    + "<span class=\"opacity-0\">"
                     + "l".repeat(this.target.length - Math.max(this.upperBound, this.correctPrefix))
                     + "</span>"
                 );
@@ -43,7 +43,7 @@ class Scramble {
                 "<span class=\"text-zinc-700\">"
                 + getScrambled(this.totalSize)
                 + "</span>"
-                + "<span class=\"text-transparent\">"
+                + "<span class=\"opacity-0\">"
                 + "l".repeat(this.target.length - this.totalSize)
                 + "</span>"
             );
@@ -56,5 +56,16 @@ class Scramble {
 
     stop = () => {
         clearInterval(this.intervalId);
+    }
+}
+
+class Fade {
+    constructor(elem, target) {
+        this.elem = elem;
+        this.target = target;
+    }
+
+    start = () => {
+        this.elem.style.opacity = 1;
     }
 }
