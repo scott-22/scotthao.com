@@ -28,7 +28,7 @@ Currently, when specifying the request method, exactly one of `:GET`, `:HEAD`, `
 ### Templates
 Why write HTML when you can write Lisp? Templates should be defined under `templates/static` or `templates/dynamic` depending on the type. Static templates are compiled exactly once, while dynamic templates are re-compiled every request. Templates are simply files containing a special Lisp function that produces HTML using the Spinneret `with-html` macro. See the [Spinneret docs](https://github.com/ruricolist/spinneret) for more details.
 
-To define a template called `my-template`, create a file with the same name (`my-template.lisp`) under the correct directory.
+To define a template called `my-template`, create a file with the same name (`my-template.lisp`) under the correct directory. 
 ```lisp
 ;; my-template.lisp
 ;; Ensure you are in the `templates` package
@@ -41,7 +41,9 @@ To define a template called `my-template`, create a file with the same name (`my
 (defun my-template () ...) ; 0-arg or static template
 (defun my-template (data1 data2) ...) ; dynamic template
 ```
-Note that dynamic templates will take all their data as arguments. There should be no free variables.
+Please ensure that all static templates have distinct names. Also, note that dynamic templates will take all their data as arguments. There should be no free variables.
+
+You can create additional directories under `templates/static` or `templates/dynamic`. In that case, the name of the function should replace each slash separator with an underscore. That is, a template `templates/static/folder/example.lisp` should contain the function `folder_example`.
 
 Once a template has been defined, it can be used from a route with the `template` function.
 ```lisp

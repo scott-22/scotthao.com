@@ -1,4 +1,4 @@
-const CHARS = "abcdefghijklmnopqrstuvwxyzλ";
+const CHARS = "abcdefghijklmnopqrstuvwxyzλλλ     ";
 
 const getScrambled = (len) => {
     let scramble = '';

@@ -16,9 +16,10 @@
 (defun template (file template-type &rest args)
   (let ((dir (ensure-directories-exist
                (make-pathname :directory '(:relative "templates" "compiled"))))
-         (static (ecase template-type (:static t) (:dynamic nil))))
+        (static (ecase template-type (:static t) (:dynamic nil)))
+        (file-id (substitute #\_ #\/ file)))
     (if static
-        (let ((path (merge-pathnames (make-pathname :name file :type "html") dir)))
+        (let ((path (merge-pathnames (make-pathname :name file-id :type "html") dir)))
           (unless (file-exists-p path)
             (with-open-file (spinneret:*html* path :direction :output
                                                    :if-exists :supersede
@@ -26,11 +27,11 @@
               (load (make-pathname :directory '(:relative "templates" "static")
                                    :name file
                                    :type "lisp"))
-              (apply (values (intern (string-upcase file) :templates)) args)))
+              (apply (values (intern (string-upcase file-id) :templates)) args)))
           path)
         (list
           (with-output-to-string (spinneret:*html*)
             (load (make-pathname :directory '(:relative "templates" "dynamic")
                                  :name file
                                  :type "lisp"))
-            (apply (values (intern (string-upcase file) :templates)) args))))))
+            (apply (values (intern (string-upcase file-id) :templates)) args))))))

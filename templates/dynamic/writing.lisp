@@ -30,12 +30,18 @@
        (page-subtitle "Blog")
        (dolist
          (article articles)
-         (section-item (car article) :date (cadr article) :heading-page-link (caddr article))))
+         (section-item
+           (car article)
+           :date (cadr article)
+           :heading-page-link (concatenate 'string "writing/" (caddr article)))))
      (section
        (page-subtitle "Essays")
        (dolist
          (essay essays)
-         (section-item (car essay) :date (cadr essay) :heading-page-link (caddr essay))))
+         (section-item
+           (car essay)
+           :date (cadr essay)
+           :heading-page-link (concatenate 'string "writing/" (caddr essay)))))
      (footer)))
 
 (defun writing (featured-text articles essays)
