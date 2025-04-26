@@ -45,11 +45,10 @@
          "Text Editor"
          "Terminal-based text editor built from scratch in C++. Supports most Vim commands, undo, macros, and efficient text manipulation."
          (page-url "Email for repo" "mailto:scotthao65@gmail.com")))
-     (:footer
-      :class "mt-24"
-      (page-text
-        (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")
-        :class "mb-0"))))
+     (footer
+       (page-text
+         :class "mb-0"
+         (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")))))
 
 (defun index ()
   (layout :body (body)))

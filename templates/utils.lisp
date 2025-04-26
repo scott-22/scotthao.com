@@ -31,6 +31,10 @@
       ;   (page-small (page-link "Writing" "/writing"))))
       ,@args)))
 
+(defmacro footer (&rest args)
+  `(with-html
+     (:footer :class "mt-24" ,@args)))
+
 (defmacro section (&rest args)
   `(with-html
      (:section
@@ -47,7 +51,7 @@
           ,(if heading-url
                `(url ,heading ,heading-url "hover:underline")
                heading))
-        ,(when date `(page-small ,date :class "mt-[24px]")))
+        ,(when date `(page-small :class "mt-[24px]" ,date)))
       (:div (page-description ,description)))))
 
 (defmacro url (text href &optional class)
@@ -66,47 +70,41 @@
       :class ,class
       ,text)))
 
-(defmacro page-title (title-text &rest args)
+(defmacro page-title (&rest args)
   `(with-html
      (:h1
       :class "font-emphasis text-3xl text-zinc-800"
-      ,@args
-      ,title-text)))
+      ,@args)))
 
-(defmacro page-subtitle (title-text &rest args)
+(defmacro page-subtitle (&rest args)
   `(with-html
      (:h2
       :class "text-2xl text-zinc-800 mt-4"
-      ,@args
-      ,title-text)))
+      ,@args)))
 
-(defmacro page-heading (title-text &rest args)
+(defmacro page-heading (&rest args)
   `(with-html
      (:h3
       :class "font-emphasis text-lg text-zinc-700 mt-4"
-      ,@args
-      ,title-text)))
+      ,@args)))
 
-(defmacro page-text (text &rest args)
+(defmacro page-text (&rest args)
   `(with-html
      (:p
       :class "text-base my-3"
-      ,@args
-      ,text)))
+      ,@args)))
 
-(defmacro page-description (text &rest args)
+(defmacro page-description (&rest args)
   `(with-html
      (:p
       :class "text-base my-2"
-      ,@args
-      ,text)))
+      ,@args)))
 
-(defmacro page-small (title-text &rest args)
+(defmacro page-small (&rest args)
   `(with-html
      (:p
       :class "font-emphasis text-xs text-zinc-600"
-      ,@args
-      ,title-text)))
+      ,@args)))
 
 (defmacro page-url (text href)
   `(url ,text ,href "font-emphasis hover:underline italic text-cyan-600"))
