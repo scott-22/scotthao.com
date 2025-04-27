@@ -14,6 +14,9 @@
 (defroute "/" :GET (env)
   `(200 (:content-type "text/html") ,(template "index" :static)))
 
+(defroute "/" :HEAD (env)
+  `(200 (:content-type "text/html") nil))
+
 (defroute "/writing" :GET (env)
   `(200
     (:content-type "text/html")

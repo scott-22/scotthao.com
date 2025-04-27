@@ -70,8 +70,7 @@
            (section-item
              (car essay)
              :date (cadr essay)
-             :heading-page-link (concatenate 'string "writing/" (caddr essay))))))
-     (footer)))
+             :heading-page-link (concatenate 'string "writing/" (caddr essay))))))))
 
 (defun writing (featured-text articles essays)
   (layout

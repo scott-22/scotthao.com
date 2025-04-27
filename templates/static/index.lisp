@@ -44,8 +44,7 @@
        (section-item
          "Text Editor"
          :description "Terminal-based text editor built from scratch in C++. Supports most Vim commands, undo, macros, and efficient text manipulation."
-         :date (page-url "Email for repo" "mailto:scotthao65@gmail.com")))
-     (footer)))
+         :date (page-url "Email for repo" "mailto:scotthao65@gmail.com")))))
 
 (defun index ()
   (layout :body (body)))

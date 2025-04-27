@@ -17,8 +17,11 @@
 (defmacro content (&rest args)
   `(with-html
      (:div
-      :class "max-w-[650px] min-h-screen pt-9 pb-3 px-7 md:px-9 mx-auto"
-      ,@args)))
+      :class "flex flex-col max-w-[650px] min-h-screen pt-4 sm:pt-7 md:pt-9 pb-3 px-7 md:px-9 mx-auto"
+      (:div
+       :class "flex-1"
+       ,@args)
+      (footer))))
 
 (defmacro header (title &rest args)
   `(with-html
@@ -36,7 +39,7 @@
 (defmacro footer ()
   `(with-html
      (:footer
-      :class "mt-24"
+      :class "mt-20"
       (page-text
         :class "mb-0"
         (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")))))
