@@ -7,6 +7,8 @@
       :class "font-display"
       (:head
        (:title ,title)
+       (:meta :name "description" :content "I work on smart and fast systems.")
+       (:meta :name "viewport" :content "width=device-width, initial-scale=1")
        (:link :rel "icon" :href "/public/favicon.ico")
        (:link :rel "stylesheet" :href "/public/layout.css")
        ,head)
@@ -15,7 +17,7 @@
 (defmacro content (&rest args)
   `(with-html
      (:div
-      :class "w-full sm:w-[650px] min-h-screen pt-9 pb-3 px-7 md:px-9 mx-auto"
+      :class "max-w-[650px] min-h-screen pt-9 pb-3 px-7 md:px-9 mx-auto"
       ,@args)))
 
 (defmacro header (title &rest args)
@@ -26,7 +28,7 @@
        :class "flex flex-row justify-between"
        (page-title ,title)
        (:div
-        :class "w-1/6 flex flex-row justify-between mt-[15px]"
+        :class "w-1/3 sm:w-1/5 lg:w-1/6 flex flex-row justify-between mt-[15px]"
         (page-small (page-link "Home" "/"))
         (page-small (page-link "Writing" "/writing"))))
       ,@args)))
