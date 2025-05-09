@@ -8,13 +8,18 @@
        (page-text "I work on smart and fast systems.")
        (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, writing, art, staying active, and collecting rocks.")
        (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
-       (:div 
+       (:div
         :class "flex flex-row sm:w-1/2 justify-between mt-4"
         (page-url "Linkedin" "https://www.linkedin.com/in/scott-hao/")
         (page-url "Github" "https://github.com/scott-22")
         (page-url "Email" "mailto:scotthao65@gmail.com")))
      (section
        (page-subtitle "Work")
+       (section-item
+         "University of Waterloo"
+         :description "Researching new algorithms for faster GPU matrix multiplication. Supervised by Prof. Xiao Hu and Prof. Victor Zhong."
+         :date "May 2025 - Present"
+         :heading-url "https://cs.uwaterloo.ca/")
        (section-item
          "Bloomberg"
          :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with algorithms and zero-copy strategies."
@@ -39,7 +44,7 @@
        (page-subtitle "Projects")
        (section-item
          "Intelligent Prover"
-         :description "An automated theorem prover supporting full first-order logic and smart premise selection. Currently a work-in-progress."
+         :description "An automated theorem prover supporting full first-order logic with smart premise selection using embedding-based heuristics."
          :date (page-url "Github link" "https://github.com/scott-22/intelligent-prover"))
        (section-item
          "Text Editor"
