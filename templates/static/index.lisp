@@ -16,13 +16,18 @@
      (section
        (page-subtitle "Work")
        (section-item
+         "EnCharge AI"
+         :description "Expanding model support in the ML compiler for a novel analog chip, adding new operators and primitives. Developing heuristics for NP-hard scheduling problems."
+         :date "Sep 2025 - Present"
+         :heading-url "https://www.enchargeai.com/")
+       (section-item
          "University of Waterloo"
-         :description "Researching new algorithms for faster GPU matrix multiplication. Supervised by Prof. Xiao Hu and Prof. Victor Zhong."
-         :date "May 2025 - Present"
+         :description "Researched new algorithms for faster sparse matrix multiplication on GPUs. Supervised by Prof. Xiao Hu and Prof. Victor Zhong."
+         :date "May 2025 - Aug 2025"
          :heading-url "https://cs.uwaterloo.ca/")
        (section-item
          "Bloomberg"
-         :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with algorithms and zero-copy strategies."
+         :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with graph algorithms and zero-copy strategies."
          :date "Jan 2025 - Apr 2025"
          :heading-url "https://www.bloomberg.com/")
        (section-item
