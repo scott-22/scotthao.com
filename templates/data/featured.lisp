@@ -7,13 +7,13 @@
      ("under lit neon signs of closed dining spots," :fade)
      ("I feel indebted for all that the city’s given me in 4 months." :fade)
      ("I have the urge to jump, throw up my hands," :fade)
-     ("and yell “I’ll miss you!”" :fade)
+     ("and yell “*I’ll miss you!*”" :fade)
      ("This is goodbye, for now." :fade))
 
      (("The pagoda stood tall on the dusty mountain," :scramble)
       ("its red paint dulled from dirt and wear. It stood proud despite its age, with solemn responsibility." :fade)
       (" Walking down its spiraling steps, I saw faded scenes adorn its 8 sides, references to fables that I did not know." :fade)
-      ("A crane gazing softly at a general and his army: here lay the dead, it seemed to say." :fade))
+      ("A crane gazing softly at a general and his army: *here lay the dead*, it seemed to say." :fade))
 
      (("Every family has its myths." :scramble)
       ("They’re the tales we hear from our parents and grandparents, the kind told over the dinner table with nostalgic smiles." :fade)
@@ -22,7 +22,7 @@
       ;("Read more" :link "/writing/filename"))
 
      (("I used to have a fascination with terrariums." :scramble)
-      ("It was something about the self-containedness, the bustling energy of an ecosystem just right there. When you look closer, you see more details. It was just as complicated as our real world, but miniaturized." :fade)
+      ("It was something about the self-containedness, the bustling energy of an ecosystem just *right there*. When you look closer, you see more details. It was just as complicated as our real world, but miniaturized." :fade)
       ("Above all other plants I'd see in there, I loved the ferns, whose leaves looked just like themselves. I would later find out the mathematical term for this repetition: a fractal. An infinite pattern that gets smaller, but no less inspiring." :fade)
       ("Kind of like a terrarium." :fade))
 

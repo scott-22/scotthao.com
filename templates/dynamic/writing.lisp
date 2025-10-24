@@ -3,6 +3,7 @@
 
 (defmacro head ()
   `(with-html
+     (:meta :name "robots" :content "noindex")
      (:script :type "text/javascript" :src "public/scramble.js")
      (:script
       :type "text/javascript"
@@ -36,13 +37,13 @@
 (defmacro body ()
   `(content
      (header
-       "Scott Hao"
+       "Writing"
        (dolist
          (i featured-text)
          (unless (eql (cadr i) :link)
            (page-text
              :class "text-effect"
-             (:span :class "opacity-0 transition-opacity duration-[3000ms]" (car i)))))
+             (:span :class "opacity-0 transition-opacity duration-[3000ms]" ""))))
        (:div
         :class "flex flex-row w-1/4 justify-between"
         (page-small

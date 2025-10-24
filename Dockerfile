@@ -1,5 +1,5 @@
 # ------------- Base image used for both build targets  -------------
-FROM clfoundation/sbcl:latest AS base
+FROM clfoundation/sbcl:2.2.4 AS base
 ARG SITENAME
 
 RUN apt-get update \

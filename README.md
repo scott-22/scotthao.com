@@ -68,7 +68,7 @@ To develop, run the Docker container while setting the target env variable to `d
 1. Use editor of choice to edit the project
 1. To access dev utilities, connect to port `4005` using emacs with SLIME (`M-x slime-connect` with default settings) and open a REPL
 
-If using dev utilities, you can recompile the website from the REPL with `(rl)`. See `devutils.lisp` for all utilities.
+If using dev utilities, you can recompile the website from the REPL with `(rl)`. Note that you must initiate a recompile before the tailwind CSS file is generated. See `devutils.lisp` for all utilities.
 
 ## Deployment
 

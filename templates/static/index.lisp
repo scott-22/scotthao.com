@@ -17,7 +17,7 @@
        (page-subtitle "Work")
        (section-item
          "EnCharge AI"
-         :description "Expanding model support in the ML compiler for a novel analog chip, adding new operators and primitives. Developing heuristics for NP-hard scheduling problems."
+         :description "Developing compiler infrastructure for a novel analog compute chip. Expanding model support, creating a memory virtualization layer, designing heuristics for NP-hard scheduling problems."
          :date "Sep 2025 - Present"
          :heading-url "https://www.enchargeai.com/")
        (section-item
