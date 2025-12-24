@@ -45,15 +45,14 @@
              :class "text-effect"
              (:span :class "opacity-0 transition-opacity duration-[3000ms]" ""))))
        (:div
-        :class "flex flex-row w-1/4 justify-between"
-        (page-small
-          :class "mt-4"
-          (page-link
-            (:raw "&nbsp;") "" "text-effect hover:underline italic text-cyan-600"))
-        (page-small
-          :class "mt-4"
-          (page-link
-            "" "" "text-effect hover:underline italic text-cyan-600"))))
+        :class "flex flex-row w-1/4 justify-between justify-items-start items-start place-items-start"
+        (dolist
+          (i (cons (list "" :link) featured-text))
+          (when (eql (cadr i) :link)
+            (page-small
+              :class "mt-4"
+              (page-link
+                (:raw "&nbsp;") "" "text-effect hover:underline italic text-cyan-600"))))))
      (when articles
        (section
          (page-subtitle "Blog")

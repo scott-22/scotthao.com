@@ -10,6 +10,8 @@
        (:meta :name "description" :content "I work on smart and fast systems.")
        (:meta :name "viewport" :content "width=device-width, initial-scale=1")
        (:link :rel "icon" :href "/public/favicon.ico")
+       (:link :rel "preload" :href "/public/OpenSans-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
+       (:link :rel "preload" :href "/public/OpenSans-Italic-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
        (:link :rel "stylesheet" :href "/public/layout.css")
        ,head)
       (:body ,body))))

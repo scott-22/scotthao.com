@@ -17,8 +17,8 @@
        (page-subtitle "Work")
        (section-item
          "EnCharge AI"
-         :description "Developing compiler infrastructure for a novel analog compute chip. Expanding model support, creating a memory virtualization layer, designing heuristics for NP-hard scheduling problems."
-         :date "Sep 2025 - Present"
+         :description "Developed compiler infrastructure for a novel analog compute chip. Built memory and compute primitives, enhanced the kernel programming model, designed heuristics for NP-hard scheduling."
+         :date "Sep 2025 - Dec 2025"
          :heading-url "https://www.enchargeai.com/")
        (section-item
          "University of Waterloo"
@@ -34,17 +34,7 @@
          "Bloomberg"
          :description "Released a debugging tool for distributed systems to over 300 engineers. Fixed an org-wide observability bug causing missing data in distributed traces that went unsolved for 6 months."
          :date "May 2024 - Aug 2024"
-         :heading-url "https://www.bloomberg.com/")
-       (section-item
-         "MIT-PITT-RW"
-         :description "Infrastructure work for an autonomous racing team. Created data visualizations used by a team-authored paper accepted to ICRA 2025."
-         :date "Oct 2023 - Apr 2024"
-         :heading-url "https://www.indyautonomouschallenge.com/mit-pitt-rw")
-       (section-item
-         "Royal Bank of Canada"
-         :description "Prototyped a rule-based system to score the quality of internal APIs. Designed a grammar and parser for scoring guidelines."
-         :date "Jul 2023 - Aug 2023"
-         :heading-url "https://www.rbcroyalbank.com/"))
+         :heading-url "https://www.bloomberg.com/"))
      (section
        (page-subtitle "Projects")
        (section-item
