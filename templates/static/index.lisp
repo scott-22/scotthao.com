@@ -16,6 +16,11 @@
      (section
        (page-subtitle "Work")
        (section-item
+         "Modal"
+         :description "Building the world's most scalable sandboxes. Distributed locking, lifecycle event probes, and system resiliency for Modal's new sandbox architecture."
+         :date "May 2026 - Present"
+         :heading-url "https://modal.com/")
+       (section-item
          "EnCharge AI"
          :description "Developed compiler infrastructure for a novel analog compute chip. Built memory and compute primitives, enhanced the kernel programming model, designed heuristics for NP-hard scheduling."
          :date "Sep 2025 - Dec 2025"
@@ -29,12 +34,12 @@
          "Bloomberg"
          :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with graph algorithms and zero-copy strategies."
          :date "Jan 2025 - Apr 2025"
-         :heading-url "https://www.bloomberg.com/")
+         :heading-url "https://www.bloomberg.com/company/")
        (section-item
          "Bloomberg"
          :description "Released a debugging tool for distributed systems to over 300 engineers. Fixed an org-wide observability bug causing missing data in distributed traces that went unsolved for 6 months."
          :date "May 2024 - Aug 2024"
-         :heading-url "https://www.bloomberg.com/"))
+         :heading-url "https://www.bloomberg.com/company/"))
      (section
        (page-subtitle "Projects")
        (section-item

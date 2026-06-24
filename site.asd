@@ -1,6 +1,7 @@
 (defsystem "site"
   :author "Scott Hao"
   :depends-on ("clack"
+               "clack-handler-woo"
                "lack"
                "spinneret"
                "parenscript"
