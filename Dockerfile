@@ -14,6 +14,11 @@ ENV QUICKLISP_ADD_TO_INIT_FILE=true
 RUN /usr/local/bin/install-quicklisp
 
 WORKDIR /home/site/quicklisp/local-projects/"${SITENAME}"
+
+COPY site.asd .
+RUN sbcl --non-interactive \
+    --eval '(ql:quickload (asdf:system-depends-on (asdf:find-system "site")))'
+
 USER root
 
 # Download tailwind.css executable
