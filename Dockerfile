@@ -21,7 +21,18 @@ RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4
     && chmod +x tailwindcss-linux-x64 \
     && mv tailwindcss-linux-x64 tailwindcss
 
+# Use Chroma for code rendering
+RUN curl -sL https://github.com/alecthomas/chroma/releases/download/v2.27.0/chroma-2.27.0-linux-amd64.tar.gz \
+    | tar xz chroma
+
+# Use KaTeX for math rendering, running on QuickJS
+RUN curl -sLo qjs https://github.com/quickjs-ng/quickjs/releases/download/v0.16.1/qjs-linux-x86_64 \
+    && chmod +x qjs \
+    && curl -sL https://github.com/KaTeX/KaTeX/releases/download/v0.18.4/katex.tar.gz | tar xz
+
 COPY . .
+
+RUN ./tools/build-assets.sh
 
 
 # ------------- Development image  -------------

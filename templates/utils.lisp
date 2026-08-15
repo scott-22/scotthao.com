@@ -1,20 +1,22 @@
 (in-package :templates)
 
 (defmacro layout (&key (title "Scott Hao") (head nil) (body nil))
-  `(with-html
-     (:doctype)
-     (:html
-      :class "font-display"
-      (:head
-       (:title ,title)
-       (:meta :name "description" :content "I work on smart and fast systems.")
-       (:meta :name "viewport" :content "width=device-width, initial-scale=1")
-       (:link :rel "icon" :href "/public/favicon.ico")
-       (:link :rel "preload" :href "/public/OpenSans-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
-       (:link :rel "preload" :href "/public/OpenSans-Italic-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
-       (:link :rel "stylesheet" :href "/public/layout.css")
-       ,head)
-      (:body ,body))))
+  `(let ((spinneret:*suppress-inserted-spaces* t)
+         (spinneret:*fill-column* 100000))
+     (with-html
+       (:doctype)
+       (:html
+        :class "font-display"
+        (:head
+         (:title ,title)
+         (:meta :name "description" :content "I work on smart and fast systems.")
+         (:meta :name "viewport" :content "width=device-width, initial-scale=1")
+         (:link :rel "icon" :href "/public/favicon.ico")
+         (:link :rel "preload" :href "/public/OpenSans-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
+         (:link :rel "preload" :href "/public/OpenSans-Italic-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
+         (:link :rel "stylesheet" :href "/public/layout.css")
+         ,head)
+        (:body ,body)))))
 
 (defmacro content (&rest args)
   `(with-html
@@ -41,7 +43,7 @@
 (defmacro footer ()
   `(with-html
      (:footer
-      :class "mt-20"
+      :class "mt-20 clear-both"
       (page-text
         :class "mb-0"
         (page-url "Made with λ" "https://github.com/scott-22/scotthao.com")))))
@@ -49,7 +51,7 @@
 (defmacro section (&rest args)
   `(with-html
      (:section
-      :class "mt-12"
+      :class "mt-12 clear-both"
       ,@args)))
 
 (defmacro section-item (heading &key description date heading-url heading-page-link)
@@ -122,3 +124,101 @@
 
 (defmacro page-url (text href)
   `(url ,text ,href "font-emphasis hover:underline italic text-cyan-600"))
+
+(defmacro page-italic (&rest args)
+  `(with-html
+     (:em :class "italic" ,@args)))
+
+(defmacro page-bold (&rest args)
+  `(with-html
+     (:strong :class "font-semibold" ,@args)))
+
+;; Raw string reader to make formatting code easier
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defun read-raw-string (stream char arg)
+    (declare (ignore char arg))
+    (coerce (loop for c = (read-char stream)
+                  until (and (char= c #\}) (char= (peek-char nil stream) #\#))
+                  collect c
+                  finally (read-char stream))
+            'string))
+
+  (set-dispatch-macro-character #\# #\{ #'read-raw-string))
+
+;; Memoize formatted code/math output to avoid recompiling eacn macro expansion.
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (defparameter *render-cache* (make-hash-table :test #'equal))
+
+  (defun render-with (program args input)
+    (let ((key (list* program input args)))
+      (or (gethash key *render-cache*)
+          (setf (gethash key *render-cache*)
+                (uiop:run-program (cons program args)
+                                  :input (make-string-input-stream input)
+                                  :output :string
+                                  :error-output t)))))
+
+  (defun render-math (tex &optional display)
+    (render-with "./qjs"
+                 (append (list "-m" "tools/render-math.mjs")
+                         (when display (list "display")))
+                 tex))
+
+  ; Add a custom lexer for TLA
+  (defun render-code (language code)
+    (render-with "./chroma"
+                 (list "--fail"
+                       "--lexer" (if (eq language :tla)
+                                     "tools/tla.chroma"
+                                     (string-downcase (symbol-name language)))
+                       "--style" "github"
+                       "--html" "--html-only" "--html-prefix" "hl-")
+                 (string-right-trim '(#\Space #\Tab #\Newline)
+                                    (string-left-trim '(#\Newline) code)))))
+
+(defmacro page-math-styles ()
+  `(with-html
+     (:link :rel "stylesheet" :href "/public/katex/katex.min.css")))
+
+(defmacro page-code-styles ()
+  `(with-html
+     (:link :rel "stylesheet" :href "/public/chroma.css")))
+
+(defmacro page-math (tex)
+  `(with-html (:raw ,(render-math tex))))
+
+(defmacro page-display-math (tex)
+  `(with-html (:raw ,(render-math tex t))))
+
+(defmacro page-code (&rest args)
+  `(with-html
+     (:code
+      :class "font-mono text-[0.85em] text-zinc-700 bg-zinc-100 rounded px-1 py-0.5"
+      ,@args)))
+
+(defmacro page-code-block (language code)
+  `(with-html (:raw ,(render-code language code))))
+
+(defmacro page-image (src &key caption alt (size :full) (embed :block))
+  `(with-html
+     (:figure
+      :class ,(concatenate 'string
+                           (ecase embed
+                             (:left "float-left clear-left mt-1 mb-3 mr-5")
+                             (:right "float-right clear-right mt-1 mb-3 ml-5")
+                             (:block "clear-both mx-auto my-6"))
+                           " "
+                           (ecase size
+                             (:small "w-1/3")
+                             (:medium "w-1/2")
+                             (:large "w-3/4")
+                             (:full "w-full")))
+      (:img
+       :src ,src
+       :alt ,(or alt caption "")
+       :loading "lazy"
+       :class "w-full h-auto rounded")
+      ,(when caption
+         `(:figcaption
+           :class "font-emphasis text-xs text-zinc-600 text-center mt-2"
+           ,caption)))))
