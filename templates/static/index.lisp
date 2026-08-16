@@ -9,15 +9,15 @@
        (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, writing, art, staying active, and collecting rocks.")
        (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
        (:div
-        :class "flex flex-row sm:w-1/2 justify-between mt-4"
+        :class "flex flex-row w-2/3 sm:w-2/5 justify-between mt-4"
         (page-url "Linkedin" "https://www.linkedin.com/in/scott-hao/")
-        (page-url "Github" "https://github.com/scott-22")
-        (page-url "Email" "mailto:scotthao65@gmail.com")))
+        (page-url "X" "https://x.com/shao256")
+        (page-url "Github" "https://github.com/scott-22")))
      (section
        (page-subtitle "Work")
        (section-item
          "Modal"
-         :description "Building the world's most scalable sandboxes. Distributed locking, lifecycle event probes, and system resiliency for Modal's new sandbox architecture."
+         :description "Distributed locking and scheduling reliability for the world's most scalable sandboxes. Designed the new event-processing system used for sandbox and function lifecycle events."
          :date "May 2026 - Present"
          :heading-url "https://modal.com/")
        (section-item

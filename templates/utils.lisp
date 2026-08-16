@@ -21,7 +21,7 @@
 (defmacro content (&rest args)
   `(with-html
      (:div
-      :class "flex flex-col max-w-[650px] min-h-screen pt-4 sm:pt-7 md:pt-9 pb-3 px-7 md:px-9 mx-auto"
+      :class "flex flex-col max-w-[660px] min-h-screen pt-4 sm:pt-7 md:pt-9 pb-3 px-7 md:px-9 mx-auto"
       (:div
        :class "flex-1"
        ,@args)
@@ -125,6 +125,9 @@
 (defmacro page-url (text href)
   `(url ,text ,href "font-emphasis hover:underline italic text-cyan-600"))
 
+(defmacro page-url-text (text href)
+  `(url ,text ,href "hover:underline text-cyan-600"))
+
 (defmacro page-italic (&rest args)
   `(with-html
      (:em :class "italic" ,@args)))
@@ -187,7 +190,7 @@
 (defmacro page-math (tex)
   `(with-html (:raw ,(render-math tex))))
 
-(defmacro page-display-math (tex)
+(defmacro page-math-block (tex)
   `(with-html (:raw ,(render-math tex t))))
 
 (defmacro page-code (&rest args)
@@ -222,3 +225,31 @@
          `(:figcaption
            :class "font-emphasis text-xs text-zinc-600 text-center mt-2"
            ,caption)))))
+
+(defmacro table-of-contents (entries)
+  `(with-html
+     ;; Vertical spacing is the caller's business - this can sit in the flow or
+     ;; be positioned into the page margin.
+     (:nav
+      :class "clear-both"
+      (:p
+       :class "font-emphasis text-sm text-zinc-600"
+       "Table of Contents")
+      (:ul
+       :class "mt-2 space-y-1"
+       ,@(loop for (text id) in (second entries)
+               collect `(:li
+                         (page-link
+                           ,text
+                           ,(concatenate 'string "#" id)
+                           "text-sm text-zinc-700 hover:underline hover:text-cyan-600")))))))
+
+;; Blog introduction alongside table of contents
+(defmacro blog-intro (intro table-entries)
+  `(with-html
+     (:div
+      :class "relative"
+      ,@(second intro)
+      (:div
+       :class "mt-8 lg:mt-0 lg:absolute lg:top-[40%] lg:-translate-y-1/2 lg:left-full lg:ml-6 xl:ml-10 lg:w-44"
+       (table-of-contents ,table-entries)))))
