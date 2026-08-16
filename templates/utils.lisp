@@ -89,13 +89,13 @@
 (defmacro page-title (&rest args)
   `(with-html
      (:h1
-      :class "font-emphasis text-3xl text-zinc-800"
+      :class "font-emphasis text-3xl text-zinc-800 w-4/5"
       ,@args)))
 
 (defmacro page-subtitle (&rest args)
   `(with-html
      (:h2
-      :class "text-2xl text-zinc-800 mt-4"
+      :class "font-emphasis text-2xl text-zinc-800 mt-4"
       ,@args)))
 
 (defmacro page-heading (&rest args)

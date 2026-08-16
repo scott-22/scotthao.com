@@ -4,7 +4,7 @@
 (defmacro body ()
   `(content
      (header
-       "Formally-verified distributed locks for sandboxes"
+       "Formally verified distributed locks (for sandboxes)"
        (page-small :class "mt-5" "Aug 17 2026")
        (blog-intro
          '((page-text
@@ -62,7 +62,7 @@
          "Consider the situation where a sandbox acquires the mutex, then promptly crashes without releasing the lock.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/deadlock.png"
-         :caption "Sandbox 1 acquires the lock and terminates without releasing it, so every later acquire fails.")
+         :caption "Figure 1: A deadlock blocks all future acquires")
        (page-text
          "This is a deadlock! Usually the kernel steps in, detects the process crash, and preempts the lock. But sandboxes are distributed actors, forced to communicate over unreliable networks. How do you tell whether the sandbox crashed or if there’s just a packet delay? You can’t, which makes resolving this deadlock hard.")
        (page-text
@@ -79,24 +79,24 @@
          ". After initially acquiring the lock, sandboxes must continually refresh it, or else it expires. We call this intermittent ping sent by the sandbox a heartbeat.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/lease.png"
-         :caption "The lease expires once Sandbox 1 stops refreshing it, letting Sandbox 2 acquire the lock.")
+         :caption "Figure 2: The lease expires after Sandbox 1 fails to refresh")
        (page-text
          "But networks are still unreliable. What if a sandbox continually fails to heartbeat? The lease might expire, allowing another sandbox to acquire it. To prevent a mutual exclusion (mutex) violation, the sandbox should self-terminate after failing to heartbeat for some time, before the lock is due to expire.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/self-terminate.png"
-         :caption "A network partition blocks the refresh, so Sandbox 1 self-terminates before the lease expires.")
+         :caption "Figure 3: Sandbox 1 self-terminates before the lease expires")
        (page-text
          "Is this enough? In his blog, Kleppmann argues no. We can’t rely on time-based methods (like self-termination) because of unreliable clocks and process pauses. It’s true that clock issues can be minimized, but unlucky garbage collection or scheduling starvation might cause a process to pause for an unbounded amount of time. In that case, we could see a mutex violation.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/mutex-violation.png"
-         :caption "An unbounded pause outlives the lease, and both sandboxes end up writing to the resource.")
+         :caption "Figure 4: Mutex violations can still occur due to unlucky timing")
        (page-text
          "Thus the final part of a distributed lease is a "
          (page-italic "fencing token")
          ". The lock maintains a monotonic counter that increments after each acquire. When a sandbox acquires the lock, it receives the counter’s value and passes it to the resource as a token. The resource should check to make sure the token is greater or equal to the last seen value, otherwise it rejects the write.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/fencing-token.png"
-         :caption "The resource has already seen token 2, so it rejects the stale write carrying token 1.")
+         :caption "Figure 5: The resource rejects token 1 because it has already seen token 2")
 
        (page-heading "Problems with fencing")
        (page-text
@@ -111,7 +111,7 @@
          "Network partitions can always happen, but we use our earlier strategy for dealing with them: if heartbeats keep failing, the supervisor initiates a kill-switch that terminates the sandbox before the lock expires.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/kill-switch.png"
-         :caption "The supervisor heartbeats on the sandbox’s behalf, and kills it once the refreshes keep failing.")
+         :caption "Figure 6: The supervisor heartbeats on behalf of sandboxes, initiating the kill-switch if refreshes fail")
        (page-text
          "Given these relaxed assumptions, the lock should work. But the actual system is a bit more complex than the above diagram. What if there’s a race we’re not thinking of?"))
 
@@ -390,18 +390,18 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
          " liveness updates. If a worker is alive, we can simply ask it if the sandbox is running. Thus detecting sandbox failure reduces down to detecting worker failure!")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/failure-detector.png"
-         :caption "Every sandbox updating the lock table becomes one liveness update per worker.")
+         :caption "Figure 7: We only need one liveness update per worker rather than per sandbox")
        (page-text
          "At this point, your race-condition alarms should be going off. What if the lock is preempted before we finished scheduling? What if we schedule onto a worker right before liveness expires? What if…?"))
 
      (section
        (page-subtitle :id "preemptible-locks" "Preemptible locks")
        (page-text
-         "When first designing sandbox names, we actually started with the preemptible lock. This proved to be challenging: I kept running into races I hadn’t thought of, and it was hard to be convinced that it worked. TLA was meant to address this - which it did! The third pattern below, for example, was caught by our model checker.")
+         "When first designing sandbox names, we actually started with the preemptible lock. This proved to be challenging: I kept running into races I hadn’t thought of, so it was hard to be convinced that it worked. TLA was meant to address this - which it did! The race addressed by the third pattern below, for example, was caught by our model checker.")
        (page-text
-         "But the process of formalizing the design was difficult and slow. And, certain design patterns (required for correctness) were controversial. For an initial implementation, this wasn’t worth it. A standard lease would suffice.")
+         "But the process of formalizing the design was difficult and slow. And, certain design patterns - required for correctness - were controversial. For an initial implementation, this wasn’t worth it. A standard lease would suffice.")
        (page-text
-         "Still, I wanted the preemptible design to be an option should we ever need to scale. In this section, I cover three patterns that should be enough to build out functional preemptible locks. The TLA formalization is complex enough to no longer be informative, so I’ll omit it as an exercise for the reader (or again view it on my "
+         "Still, I wanted the preemptible design to be an option should we ever need to scale. In this section, I cover three patterns for building out a functional preemptible lock. The TLA formalization is complex enough to no longer be informative, so I’ll omit it as an exercise for the reader (or again view it on my "
          (page-url-text "Github" "https://github.com/scott-22/tla-specs/blob/main/Preemptable.tla")
          ").")
 
@@ -409,7 +409,9 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
        (page-text
          "In our creation flow, we want lock acquisition and sandbox creation to behave atomically. Otherwise, we could acquire the lock, preempt it before scheduling the sandbox, then immediately cause a mutex violation.")
        (page-text
-         "The standard way to do this is 2-Phase Commit. The lock has two “taken” states: an intermediate "
+         "The standard way to do this is "
+         (page-url-text "2-Phase Commit" "https://en.wikipedia.org/wiki/Two-phase_commit_protocol")
+         ". The lock has two “taken” states: an intermediate "
          (page-italic "acquiring")
          " state, and a committed "
          (page-italic "acquired")
@@ -417,7 +419,7 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/two-phase-commit.png"
          :size :large
-         :caption "The lock's states. Only a committed lock can be preempted; an acquiring one has to expire.")
+         :caption "Figure 8: The lock represented as a state machine")
        (page-text
          "A natural question to ask is what if the commit fails? To really make this work, the commit needs to happen via heartbeat. Once confirmed, the sandbox can stop heartbeating. Finally, if commits keep failing, then a kill-switch should activate before lock expiry.")
 
@@ -434,7 +436,7 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
          "To prevent yet another mutex violation, we should never create named sandboxes on a worker after its kill-switch initiates until it sends a successful heartbeat and refreshes its liveness.")
        (page-image
          "/public/writing/sandboxes-and-distributed-locks/kill-switch-sync.png"
-         :caption "Once the kill-switch fires, scheduling named sandboxes onto the worker is blocked.")
+         :caption "Figure 9: Block named sandboxes after the kill-switch, until liveness is restored")
        (page-text
          "This could be done in two ways: either the scheduler keeps track of this, or the worker does. It’s safer for the worker to do it - one can imagine a packet delay that holds a scheduling request just until the kill-switch triggers, for example.")
        (page-text
