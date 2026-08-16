@@ -1,3 +1,3 @@
 (
-;    ("Title of blog post" "Apr 2025" "filename")
+    ("Formally-verified distributed locking" "Aug 2026" "distributed-locking")
 )
