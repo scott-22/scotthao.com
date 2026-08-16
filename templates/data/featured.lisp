@@ -19,7 +19,7 @@
     
     (("\"To parody a well-known saying," :scramble)
      ("I shall say that a little formalism turns one away from History," :fade)
-     ("but that a lot brings one back to it." :fade)
+     ("but that a lot brings one back to it.\"" :fade)
      ("Barthes, *Mythologies*" :fade))
     
     (("\"How can it be that every child succeeds" :scramble)
