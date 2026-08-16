@@ -1,10 +1,16 @@
 (in-package :templates)
 (load "templates/utils.lisp")
 
+(defmacro head ()
+  `(with-html
+     (page-math-styles)
+     (page-code-styles)
+     (:meta :name "robots" :content "noindex")))
+
 (defmacro body ()
   `(content
      (header
-       "Formally verified distributed locks (for sandboxes)"
+       "Formally verified distributed locks for sandboxes"
        (page-small :class "mt-5" "Aug 17 2026")
        (blog-intro
          '((page-text
@@ -380,7 +386,7 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
          "However, consider what happens as we scale the number of named sandboxes. Every sandbox makes a transactional write when refreshing, causing high steady-state load that could exceed what a single database node can handle. Typically, we’d shard the lock table and key by name. But that could be more cost than we actually need!")
        (page-text
          "Let’s do a thought experiment: rather than expiring the lock, what if we made the lock preemptible if the owner has terminated? Then we might do away with heartbeats. In distributed systems, this is called a "
-         (page-italic "failure detector")
+         (page-url-text "failure detector" "https://en.wikipedia.org/wiki/Failure_detector")
          ". Unfortunately for us, perfect ones don’t exist. Failure detectors must choose between completeness (all sandbox failures are reported) or accuracy (we never report false failure). For us, deadlocks are never acceptable, so any failure detector must be complete at the risk of inaccuracy - same as our lease.")
        (page-text
          "Not all hope is lost: there’s one trick we can use by adopting a failure detector model. Instead of "
@@ -457,5 +463,5 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
 (defun writing_distributed-locks ()
   (layout
     :title "Blog - Scott Hao"
-    :head (progn (page-math-styles) (page-code-styles))
+    :head (head)
     :body (body)))
