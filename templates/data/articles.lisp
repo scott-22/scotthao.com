@@ -1,3 +1,3 @@
 (
-    ("Formally-verified distributed locking" "Aug 2026" "distributed-locking")
+    ("Formally-verified distributed locking" "Aug 2026" "distributed-locks")
 )

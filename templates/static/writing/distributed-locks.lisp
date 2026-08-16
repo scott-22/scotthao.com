@@ -4,7 +4,7 @@
 (defmacro body ()
   `(content
      (header
-       "Formally-verified distributed locking"
+       "Formally-verified distributed locks for sandboxes"
        (page-small :class "mt-5" "Aug 17 2026")
        (blog-intro
          '((page-text
@@ -452,7 +452,7 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
          "Coming into this internship, I knew next to nothing about distributed systems. I’ve grown immensely over the past 4 months, and through trial by fire, had the chance to own systems end-to-end and bring them to life. Thanks for reading, and I hope you learned something!")
        (page-text "Scott :)"))))
 
-(defun writing_sandboxes-and-distributed-locks ()
+(defun writing_distributed-locks ()
   (layout
     :title "Blog - Scott Hao"
     :head (progn (page-math-styles) (page-code-styles))

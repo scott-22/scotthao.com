@@ -1,6 +1,24 @@
 (in-package controllers)
 
 ;; Helper functions
+
+(defun valid-slug-p (slug)
+  (and (stringp slug)
+       (plusp (length slug))
+       (every #'(lambda (char)
+                  (or (alphanumericp char)
+                      (char= char #\-)
+                      (char= char #\_)))
+              slug)))
+
+(defun article-exists-p (article)
+  (and (valid-slug-p article)
+       (uiop:file-exists-p
+         (make-pathname :directory '(:relative "templates" "static" "writing")
+                        :name article
+                        :type "lisp"))
+       t))
+
 (defun read-data (data-file)
   (with-open-file (stream
                    (make-pathname
@@ -28,12 +46,14 @@
          "writing" :dynamic featured-text articles essays))))
 
 (defroute "/writing/:article" :GET (env)
-  `(200
-    (:content-type "text/html")
-    ,(let ((article (getf (getf env :route-params) :article)))
-       (template
-         (concatenate 'string "writing/" article)
-         :static))))
+  (let ((article (getf (getf env :route-params) :article)))
+    (if (article-exists-p article)
+        `(200
+          (:content-type "text/html")
+          ,(template
+             (concatenate 'string "writing/" article)
+             :static))
+        404)))
 
 ;; Default error handlers
 (defroute 404 (env)
