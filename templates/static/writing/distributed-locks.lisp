@@ -462,6 +462,7 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
 
 (defun writing_distributed-locks ()
   (layout
-    :title "Blog - Scott Hao"
+    :title "Formally verified distributed locks for sandboxes - Scott Hao"
+    :description ""
     :head (head)
     :body (body)))

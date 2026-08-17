@@ -74,4 +74,7 @@
 
 (defun writing (featured-text articles essays)
   (layout
-    :title "Writing - Scott Hao" :head (head) :body (body)))
+    :title "Writing - Scott Hao"
+    :description "Welcome to my blog."
+    :head (head)
+    :body (body)))

@@ -8,4 +8,7 @@
        (page-text "This page was not found."))))
 
 (defun 404error ()
-  (layout :title "Not found - Scott Hao" :body (body)))
+  (layout
+    :title "Not found - Scott Hao"
+    :description "This page was not found."
+    :body (body)))

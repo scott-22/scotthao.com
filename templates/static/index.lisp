@@ -52,4 +52,7 @@
          :date (page-url "Email for repo" "mailto:scotthao65@gmail.com")))))
 
 (defun index ()
-  (layout :body (body)))
+  (layout
+    :title "Scott Hao"
+    :description "I work on smart and fast systems."
+    :body (body)))

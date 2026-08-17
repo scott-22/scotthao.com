@@ -1,6 +1,6 @@
 (in-package :templates)
 
-(defmacro layout (&key (title "Scott Hao") (head nil) (body nil))
+(defmacro layout (&key title description (head nil) (body nil))
   `(let ((spinneret:*suppress-inserted-spaces* t)
          (spinneret:*fill-column* 100000))
      (with-html
@@ -9,7 +9,7 @@
         :class "font-display"
         (:head
          (:title ,title)
-         (:meta :name "description" :content "I work on smart and fast systems.")
+         (:meta :name "description" :content ,description)
          (:meta :name "viewport" :content "width=device-width, initial-scale=1")
          (:link :rel "icon" :href "/public/favicon.ico")
          (:link :rel "preload" :href "/public/OpenSans-VariableFont_wdth,wght.ttf" :as "font" :type "font/ttf" :crossorigin "anonymous")
