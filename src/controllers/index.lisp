@@ -45,6 +45,9 @@
        (template
          "writing" :dynamic featured-text articles essays))))
 
+(defroute "/writing" :HEAD (env)
+  `(200 (:content-type "text/html") nil))
+
 (defroute "/writing/:article" :GET (env)
   (let ((article (getf (getf env :route-params) :article)))
     (if (article-exists-p article)
@@ -53,6 +56,12 @@
           ,(template
              (concatenate 'string "writing/" article)
              :static))
+        404)))
+
+(defroute "/writing/:article" :HEAD (env)
+  (let ((article (getf (getf env :route-params) :article)))
+    (if (article-exists-p article)
+        `(200 (:content-type "text/html") nil)
         404)))
 
 ;; Default error handlers
