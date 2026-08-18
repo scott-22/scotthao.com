@@ -5,6 +5,7 @@
   `(with-html
      (page-math-styles)
      (page-code-styles)
+     (:meta :property "og:image" :content "https://scotthao.com/public/writing/sandboxes-and-distributed-locks/mutex-violation.png")
      (:meta :name "robots" :content "noindex")))
 
 (defmacro body ()
@@ -463,6 +464,6 @@ fair process (workerheartbeat \in SandboxProcess("WorkerHeartbeat")) {
 (defun writing_distributed-locks ()
   (layout
     :title "Formally verified distributed locks for sandboxes - Scott Hao"
-    :description ""
+    :description "I’m wrapping up my internship at Modal, where I worked on our new, massively scalable sandbox architecture."
     :head (head)
     :body (body)))

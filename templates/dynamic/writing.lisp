@@ -3,7 +3,7 @@
 
 (defmacro head ()
   `(with-html
-     (:meta :name "robots" :content "noindex")
+     (:meta :name "robots" :content "noindex, nofollow")
      (:script :type "text/javascript" :src "public/scramble.js")
      (:script
       :type "text/javascript"
