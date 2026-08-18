@@ -4,7 +4,7 @@
 (defmacro head ()
   `(with-html
      (:meta :name "robots" :content "noindex, nofollow")
-     (:script :type "text/javascript" :src "public/scramble.js")
+     (:script :type "text/javascript" :src "/public/scramble.js")
      (:script
       :type "text/javascript"
       (:raw (ps
@@ -61,7 +61,7 @@
            (section-item
              (car article)
              :date (cadr article)
-             :heading-page-link (concatenate 'string "writing/" (caddr article))))))
+             :heading-page-link (concatenate 'string "/writing/" (caddr article))))))
      (when essays
        (section
          (page-subtitle "Essays")
@@ -70,7 +70,7 @@
            (section-item
              (car essay)
              :date (cadr essay)
-             :heading-page-link (concatenate 'string "writing/" (caddr essay))))))))
+             :heading-page-link (concatenate 'string "/writing/" (caddr essay))))))))
 
 (defun writing (featured-text articles essays)
   (layout
