@@ -6,6 +6,7 @@
      (page-math-styles)
      (page-code-styles)
      (:meta :property "og:image" :content "https://scotthao.com/public/writing/sandboxes-and-distributed-locks/mutex-violation.png")
+     (:meta :name "twitter:card" :content "summary_large_image")
      (:meta :name "robots" :content "noindex")))
 
 (defmacro body ()
