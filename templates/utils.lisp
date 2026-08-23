@@ -183,7 +183,8 @@
 
 (defmacro page-math-styles ()
   `(with-html
-     (:link :rel "stylesheet" :href "/public/katex/katex.min.css")))
+     (:link :rel "stylesheet" :href "/public/katex/katex.min.css")
+     (:style (:raw ".katex-display{overflow-x:auto;overflow-y:hidden;padding:2px 0;}"))))
 
 (defmacro page-code-styles ()
   `(with-html

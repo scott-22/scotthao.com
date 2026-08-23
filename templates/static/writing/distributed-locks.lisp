@@ -206,7 +206,7 @@ Liveness ==
          " is "
          (page-italic "leads to")
          ", syntactic sugar for “always if A then eventually B”. Altogether, we have:"
-         (page-math-block "\\forall s\\in S: \\Box\\big[(\\lnot\\text{Critical}(s)\\land \\text{Lock}=s)\\to\\Diamond (\\text{Lock}\\ne s)\\big]"))
+         (page-math-block "\\forall s\\in S: \\Box\\big[(\\lnot\\text{Critical}(s)\\land \\text{Lock}=s)\\to\\Diamond (\\text{Critical}(s)\\lor\\text{Lock}\\ne s)\\big]"))
        (page-text
          "Last, recall that our approach is time-based. If we have "
          (page-code "UnreliableTiming")

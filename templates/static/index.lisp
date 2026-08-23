@@ -17,19 +17,14 @@
        (page-subtitle "Work")
        (section-item
          "Modal"
-         :description "Distributed locking and scheduling reliability for the world's most scalable sandboxes. Designed the new event-processing system used for sandbox and function lifecycle events."
-         :date "May 2026 - Present"
+         :description "Distributed locking and scheduling reliability for the world's most scalable sandboxes. Designed the new event-processing system used for all sandbox and function lifecycle events."
+         :date "May 2026 - Aug 2026"
          :heading-url "https://modal.com/")
        (section-item
          "EnCharge AI"
-         :description "Developed compiler infrastructure for a novel analog compute chip. Built memory and compute primitives, enhanced the kernel programming model, designed heuristics for NP-hard scheduling."
+         :description "Compiler infrastructure for a novel analog compute chip. Built compute and memory primitives, devised heuristics for NP-hard scheduling, and added while-loops to the kernel programming model."
          :date "Sep 2025 - Dec 2025"
          :heading-url "https://www.enchargeai.com/")
-       (section-item
-         "University of Waterloo"
-         :description "Researched new algorithms for faster sparse matrix multiplication on GPUs. Supervised by Prof. Xiao Hu and Prof. Victor Zhong."
-         :date "May 2025 - Aug 2025"
-         :heading-url "https://cs.uwaterloo.ca/")
        (section-item
          "Bloomberg"
          :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with graph algorithms and zero-copy strategies."
