@@ -5,8 +5,9 @@
   `(content
      (header
        "Scott Hao"
+       (page-image "/public/silicon.jpeg")
        (page-text "I work on smart and fast systems.")
-       (page-text "That broadly includes AI, computer systems, and where they intersect. I also love psychology, cooking, writing, art, staying active, and collecting rocks.")
+       (page-text "That broadly includes AI, computer systems, and where they intersect. I also love writing, staying active, sewing, the drums, and collecting rocks.")
        (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
        (:div
         :class "flex flex-row w-2/3 sm:w-2/5 justify-between mt-4"
@@ -17,34 +18,19 @@
        (page-subtitle "Work")
        (section-item
          "Modal"
-         :description "Distributed locking and scheduling reliability for the world's most scalable sandboxes. Designed the new event-processing system used for all sandbox and function lifecycle events."
-         :date "May 2026 - Aug 2026"
+         :description "Distributed locking for the world's most scalable sandboxes. Designed the ordered event pipeline underlying all sandbox and function lifecycle events."
+         :date "Summer 2026"
          :heading-url "https://modal.com/")
        (section-item
          "EnCharge AI"
-         :description "Compiler infrastructure for a novel analog compute chip. Built compute and memory primitives, devised heuristics for NP-hard scheduling, and added while-loops to the kernel programming model."
-         :date "Sep 2025 - Dec 2025"
+         :description "Compilers for a novel analog compute chip. Introduced constraint solving to the scheduler and brought while-loops to the kernel programming model."
+         :date "Fall 2025"
          :heading-url "https://www.enchargeai.com/")
        (section-item
          "Bloomberg"
-         :description "Enabled launch of new AI features in the Bloomberg terminal by optimizing pathfinding within a knowledge graph. Reduced latency by nearly 3 orders of magnitude with graph algorithms and zero-copy strategies."
-         :date "Jan 2025 - Apr 2025"
-         :heading-url "https://www.bloomberg.com/company/")
-       (section-item
-         "Bloomberg"
-         :description "Released a debugging tool for distributed systems to over 300 engineers. Fixed an org-wide observability bug causing missing data in distributed traces that went unsolved for 6 months."
-         :date "May 2024 - Aug 2024"
-         :heading-url "https://www.bloomberg.com/company/"))
-     (section
-       (page-subtitle "Projects")
-       (section-item
-         "Intelligent Prover"
-         :description "An automated theorem prover supporting full first-order logic with smart premise selection using embedding-based heuristics."
-         :date (page-url "Github link" "https://github.com/scott-22/intelligent-prover"))
-       (section-item
-         "Text Editor"
-         :description "Terminal-based text editor built from scratch in C++. Supports most Vim commands, undo, macros, and efficient text manipulation."
-         :date (page-url "Email for repo" "mailto:scotthao65@gmail.com")))))
+         :description "Two internships spanning dev tooling for distributed tracing and semantic pathfinding within an ontology, respectively."
+         :date "2024, 2025"
+         :heading-url "https://www.bloomberg.com/company/"))))
 
 (defun index ()
   (layout
