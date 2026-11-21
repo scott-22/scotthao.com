@@ -1,11 +1,28 @@
 (in-package :templates)
 (load "templates/utils.lisp")
 
+(defmacro header-image (src)
+  `(with-html
+     (:figure
+      :class "relative clear-both mx-auto my-6 w-full"
+      (:img
+       :src ,src
+       :draggable "false"
+       :class "w-full h-auto rounded select-none")
+      (:canvas
+       :id "wafer"
+       :aria-hidden "true"
+       :class "hidden sm:block absolute inset-0 w-full h-full rounded pointer-events-none"))))
+
+(defmacro head ()
+  `(with-html
+     (:script :type "module" :src "/public/wafer.js")))
+
 (defmacro body ()
   `(content
      (header
        "Scott Hao"
-       (page-image "/public/silicon.jpeg")
+       (header-image "/public/silicon.jpeg")
        (page-text "I work on smart and fast systems.")
        (page-text "That broadly includes AI, computer systems, and where they intersect. I also love writing, staying active, sewing, the drums, and collecting rocks.")
        (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
@@ -19,12 +36,12 @@
        (section-item
          "Modal"
          :description "Distributed locking for the world's most scalable sandboxes. Designed the ordered event pipeline underlying all sandbox and function lifecycle events."
-         :date "Summer 2026"
+         :date "May 2026 - Aug 2026"
          :heading-url "https://modal.com/")
        (section-item
          "EnCharge AI"
          :description "Compilers for a novel analog compute chip. Introduced constraint solving to the scheduler and brought while-loops to the kernel programming model."
-         :date "Fall 2025"
+         :date "Sep 2025 - Dec 2025"
          :heading-url "https://www.enchargeai.com/")
        (section-item
          "Bloomberg"
@@ -36,4 +53,5 @@
   (layout
     :title "Scott Hao"
     :description "I work on smart and fast systems."
+    :head (head)
     :body (body)))
