@@ -11,17 +11,17 @@
 @layer base {
   @font-face {
     font-family: 'Open Sans';
-    src: url(/public/OpenSans-VariableFont_wdth,wght.ttf) format('truetype-variations');
+    src: url(/public/OpenSans.woff2) format('woff2');
     font-weight: 300 800;
-    font-stretch: 75% 100%;
     font-style: normal;
+    font-display: block;
   }
 
   @font-face {
     font-family: 'Open Sans';
-    src: url(/public/OpenSans-Italic-VariableFont_wdth,wght.ttf) format('truetype-variations');
+    src: url(/public/OpenSans-Italic.woff2) format('woff2');
     font-weight: 300 800;
-    font-stretch: 75% 100%;
     font-style: italic;
+    font-display: block;
   }
 }

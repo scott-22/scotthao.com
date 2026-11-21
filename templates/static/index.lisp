@@ -1,12 +1,15 @@
 (in-package :templates)
 (load "templates/utils.lisp")
 
-(defmacro header-image (src)
+(defmacro header-image (src width height)
   `(with-html
      (:figure
       :class "relative clear-both mx-auto my-6 w-full"
       (:img
        :src ,src
+       :width ,width
+       :height ,height
+       :fetchpriority "high"
        :draggable "false"
        :class "w-full h-auto rounded select-none")
       (:canvas
@@ -22,7 +25,7 @@
   `(content
      (header
        "Scott Hao"
-       (header-image "/public/silicon.jpeg")
+       (header-image "/public/silicon.jpeg" "2044" "668")
        (page-text "I work on smart and fast systems.")
        (page-text "That broadly includes AI, computer systems, and where they intersect. I also love writing, staying active, sewing, the drums, and collecting rocks.")
        (page-text "I study Computer Science and Cognitive Science at the University of Waterloo.")
