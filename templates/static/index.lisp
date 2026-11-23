@@ -56,5 +56,4 @@
   (layout
     :title "Scott Hao"
     :description "I work on smart and fast systems."
-    :head (head)
     :body (body)))
